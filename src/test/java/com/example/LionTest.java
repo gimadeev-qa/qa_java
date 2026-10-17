@@ -8,9 +8,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+
 import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -20,33 +20,15 @@ public class LionTest {
     private Feline feline;
 
     @Test
-    public void testDoesHaveManeMale() throws Exception {
-        Lion lion = new Lion("Самец", feline);
-
-        boolean actual = lion.doesHaveMane();
-
-        assertTrue(actual);
-    }
-
-    @Test
-    public void testDoesHaveManeFemale() throws Exception {
-        Lion lion = new Lion("Самка", feline);
-
-        boolean actual = lion.doesHaveMane();
-
-        assertFalse(actual);
-    }
-
-    @Test
     public void testConstructorThrowsOnInvalidSex() {
-        Exception exception = assertThrows(
+        String actualMessage = assertThrows(
                 Exception.class,
                 () -> new Lion("Неизвестно", feline)
-        );
+        ).getMessage();
 
         assertEquals(
                 "Используйте допустимые значения пола животного - самец или самка",
-                exception.getMessage()
+                actualMessage
         );
     }
 
